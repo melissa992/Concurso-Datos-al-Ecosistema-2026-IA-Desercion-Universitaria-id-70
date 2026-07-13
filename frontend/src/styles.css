@@ -389,3 +389,64 @@ button[disabled] {
     grid-template-columns: 1fr;
   }
 }
+
+/* Observatorio specific styles */
+.observatory-header {
+  padding: 18px 24px;
+}
+
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin: 18px 0 22px;
+}
+
+.kpi-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.kpi-icon { font-size: 28px }
+.kpi-value { font-size: 1.25rem; font-weight:800 }
+.kpi-label { font-size: 0.9rem; color: #cfe9ff }
+.kpi-delta { margin-left:auto; font-weight:700 }
+.kpi-delta.positive { color: #7ee787 }
+.kpi-delta.negative { color: #ff8b8b }
+
+.filter-bar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin: 12px 0 20px; padding: 12px 6px }
+.filter-row { display:flex; gap:12px; flex-wrap:wrap }
+.filter-actions { display:flex; gap:8px }
+
+.dashboard-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px }
+.dashboard-grid .col { display:flex; flex-direction:column; gap:18px }
+
+.chart-card { background: rgba(255,255,255,0.02); border-radius:12px; padding:12px; border:1px solid rgba(255,255,255,0.04) }
+.chart-card-header h3{ margin:0 0 8px }
+
+.ai-area { display:flex; gap:18px; margin-top: 12px }
+.ai-area .left { width: 360px }
+.ai-area .right { flex:1 }
+
+.ai-status-card { display:flex; gap:12px; align-items:center; padding:12px; background: rgba(255,255,255,0.02); border-radius:10px }
+.ai-flag.available { color: #10b981; font-weight:800; font-size:20px }
+
+.insights { display:grid; grid-template-columns: 1fr 1fr; gap:12px }
+.insight-card { padding:12px; border-radius:10px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04) }
+
+@media (max-width: 1100px) {
+  .kpi-row { grid-template-columns: repeat(3,1fr) }
+  .dashboard-grid { grid-template-columns: 1fr }
+  .insights { grid-template-columns: 1fr }
+  .ai-area { flex-direction:column }
+  .ai-area .left { width:100% }
+}
+
+@media (max-width: 600px) {
+  .kpi-row { grid-template-columns: repeat(1,1fr) }
+}

@@ -1,40 +1,233 @@
 import { useEffect, useState } from "react";
+import KpiCard from "../components/KpiCard";
+import FilterBar from "../components/FilterBar";
+import ChartCard from "../components/ChartCard";
+import AiStatus from "../components/AiStatus";
+import InsightCard from "../components/InsightCard";
+import DashboardGrid from "../components/DashboardGrid";
+
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
+  Legend,
+} from "recharts";
+
+const mockKpis = {
+  total_records: 12456,
+  total_datasets: 3,
+  total_programs: 142,
+  model: "RandomForest v1.0",
+  last_update: "2026-07-10",
+};
+
+const trendData = [
+  { period: "2024-I", value: 1200 },
+  { period: "2024-II", value: 1500 },
+  { period: "2025-I", value: 1800 },
+  { period: "2025-II", value: 2200 },
+  { period: "2026-I", value: 2756 },
+];
+
+const pieData = [
+  { name: "Académica", value: 5200 },
+  { name: "No académica", value: 7256 },
+];
+
+const programData = [
+  { program: "Ing. Sistemas", value: 3400 },
+  { program: "Administración", value: 2100 },
+  { program: "Psicología", value: 1600 },
+  { program: "Otros", value: 6356 },
+];
+
+const variablesImportance = [
+  { name: "Asistencia", value: 0.28 },
+  { name: "Promedio", value: 0.24 },
+  { name: "Edad", value: 0.14 },
+  { name: "Pertinencia", value: 0.09 },
+  { name: "Ingresos", value: 0.08 },
+  { name: "Otros", value: 0.17 },
+];
 
 function Observatorio() {
-  const [kpis, setKpis] = useState(null);
+  const [filters, setFilters] = useState({
+    period: "2026-I",
+    university: "Universidad del Valle",
+    program: "",
+    type: "",
+  });
+  const [applied, setApplied] = useState(false);
+  const [aiStatus, setAiStatus] = useState({
+    trained: true,
+    model: "RandomForest v1.0",
+    dataset: "Desercion merged",
+    features: variablesImportance.map((v) => v.name),
+    metrics: { accuracy: 0.82 },
+    last_run: "2026-07-10",
+  });
 
   useEffect(() => {
-    // fetch KPIs from backend
-    fetch('/api/dashboard')
-      .then(res => res.json())
-      .then(setKpis)
-      .catch(() => setKpis({}));
+    // future: load KPIs via axios from /api/dashboard
   }, []);
 
+  const applyFilters = () => {
+    setApplied(true);
+  };
+  const clearFilters = () => {
+    setFilters({ period: "", university: "", program: "", type: "" });
+    setApplied(false);
+  };
+
   return (
-    <main className="hero-page">
-      <section className="hero-card">
-        <div className="hero-copy">
-          <h1 className="hero-title">Observatorio de Deserción</h1>
-          <p className="hero-description">KPIs y visualizaciones interactivas.</p>
-          <div style={{display: 'grid', gap: 12, marginTop: 20}}>
-            <div className="panel">
-              <strong>Total registros</strong>
-              <div>{kpis?.total_records ?? '—'}</div>
-            </div>
-            <div className="panel">
-              <strong>Total datasets</strong>
-              <div>{kpis?.total_datasets ?? '—'}</div>
-            </div>
-            <div className="panel">
-              <strong>Total variables</strong>
-              <div>{kpis?.total_variables ?? '—'}</div>
-            </div>
-          </div>
+    <main className="page observatory-page">
+      <section className="observatory-header">
+        <div>
+          <h1 className="hero-title">
+            Observatorio de Deserción Universitaria
+          </h1>
+          <p className="hero-description">
+            KPIs, visualizaciones y hallazgos generados por IA.
+          </p>
         </div>
-        <div className="hero-visual" aria-hidden="true">
-          <div className="orb orb-one"></div>
-          <div className="orb orb-two"></div>
+      </section>
+
+      <section className="kpi-row">
+        <KpiCard
+          icon="👨‍🎓"
+          value={mockKpis.total_records.toLocaleString()}
+          label="Total registros analizados"
+          delta="+4.2%"
+        />
+        <KpiCard
+          icon="📂"
+          value={mockKpis.total_datasets}
+          label="Total de datasets"
+          delta="+0"
+        />
+        <KpiCard
+          icon="🏫"
+          value={mockKpis.total_programs}
+          label="Total programas/instituciones"
+          delta="+1.1%"
+        />
+        <KpiCard
+          icon="🤖"
+          value={mockKpis.model}
+          label="Modelo de IA utilizado"
+          delta={aiStatus.trained ? "Activo" : "Inactivo"}
+        />
+        <KpiCard
+          icon="📅"
+          value={mockKpis.last_update}
+          label="Última actualización"
+          delta="hace 3 días"
+        />
+      </section>
+
+      <FilterBar
+        filters={filters}
+        setFilters={setFilters}
+        onApply={applyFilters}
+        onClear={clearFilters}
+      />
+
+      <DashboardGrid>
+        <div className="col">
+          <ChartCard title="Tendencia de la deserción">
+            <ResponsiveContainer width="100%" height={240}>
+              <LineChart data={trendData}>
+                <XAxis dataKey="period" />
+                <YAxis />
+                <Tooltip />
+                <Line
+                  type="monotone"
+                  dataKey="value"
+                  stroke="#3b82f6"
+                  strokeWidth={3}
+                  dot={{ r: 4 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </ChartCard>
+
+          <ChartCard title="Comparación por programa">
+            <ResponsiveContainer width="100%" height={240}>
+              <BarChart data={programData}>
+                <XAxis dataKey="program" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="value" fill="#2563eb" />
+              </BarChart>
+            </ResponsiveContainer>
+          </ChartCard>
+        </div>
+
+        <div className="col">
+          <ChartCard title="Distribución por tipo de deserción">
+            <ResponsiveContainer width="100%" height={240}>
+              <PieChart>
+                <Pie
+                  data={pieData}
+                  dataKey="value"
+                  nameKey="name"
+                  outerRadius={90}
+                  fill="#8884d8"
+                >
+                  {pieData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={index === 0 ? "#2563eb" : "#38bdf8"}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </ChartCard>
+
+          <ChartCard title="Variables con mayor influencia">
+            <ResponsiveContainer width="100%" height={240}>
+              <BarChart data={variablesImportance} layout="vertical">
+                <XAxis type="number" />
+                <YAxis dataKey="name" type="category" />
+                <Tooltip />
+                <Bar dataKey="value" fill="#2dd4bf" />
+              </BarChart>
+            </ResponsiveContainer>
+          </ChartCard>
+        </div>
+      </DashboardGrid>
+
+      <section className="ai-area">
+        <div className="left">
+          <AiStatus status={aiStatus} />
+        </div>
+        <div className="right">
+          <h3>Hallazgos Inteligentes</h3>
+          <div className="insights">
+            <InsightCard
+              title="Concentración por periodo"
+              text="La mayor concentración de deserción corresponde al periodo 2026-I."
+            />
+            <InsightCard
+              title="Programas con mayor deserción"
+              text="Los programas con mayor porcentaje son: Ing. Sistemas, Administración."
+            />
+            <InsightCard
+              title="Variables con mayor impacto"
+              text="Promedio académico y asistencia muestran el mayor impacto en la predicción."
+            />
+          </div>
         </div>
       </section>
     </main>
