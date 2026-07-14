@@ -3,6 +3,5 @@ uvicorn[standard]==0.30.6
 pandas
 scikit-learn
 joblib
-sqlalchemy
-psycopg2-binary
+numpy
 python-dotenv
