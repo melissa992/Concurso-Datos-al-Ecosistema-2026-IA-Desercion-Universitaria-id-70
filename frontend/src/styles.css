@@ -166,24 +166,24 @@ textarea {
 }
 
 .hero-title {
-  font-size: clamp(2.4rem, 4vw, 4.8rem);
-  line-height: 1.05;
+  font-size: clamp(1.6rem, 2.8vw, 3.2rem);
+  line-height: 1.1;
   font-weight: 800;
-  margin: 0 0 26px;
-  max-width: 920px;
+  margin: 0 0 20px;
+  max-width: 860px;
 }
 
 .hero-description {
-  font-size: 1.45rem;
-  line-height: 2.2;
-  margin: 0 0 18px;
-  max-width: 760px;
+  font-size: 1.25rem;
+  line-height: 1.9;
+  margin: 0 0 16px;
+  max-width: 720px;
 }
 
 .hero-description.large-info {
-  font-size: 1.55rem;
-  line-height: 2.3;
-  margin: 0 0 22px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin: 0 0 18px;
   color: #dce9f8;
 }
 
@@ -310,8 +310,8 @@ body {
 }
 
 .hero-copy .hero-title {
-  font-size: clamp(2.8rem, 4vw, 4.8rem);
-  line-height: 1.02;
+  font-size: clamp(1.8rem, 2.6vw, 2.8rem);
+  line-height: 1.1;
   max-width: 760px;
 }
 
