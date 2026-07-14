@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import KpiCard from "../components/KpiCard";
 import FilterBar from "../components/FilterBar";
 import ChartCard from "../components/ChartCard";
@@ -66,17 +67,32 @@ function Observatorio() {
     type: "",
   });
   const [applied, setApplied] = useState(false);
+  const [dashboardData, setDashboardData] = useState(null);
   const [aiStatus, setAiStatus] = useState({
-    trained: true,
-    model: "RandomForest v1.0",
-    dataset: "Desercion merged",
-    features: variablesImportance.map((v) => v.name),
-    metrics: { accuracy: 0.82 },
-    last_run: "2026-07-10",
+    trained: false,
+    model: "Not available",
+    dataset: "No dataset",
+    features: [],
+    metrics: { accuracy: 0 },
+    last_run: "—",
   });
 
   useEffect(() => {
-    // future: load KPIs via axios from /api/dashboard
+    axios
+      .get("/api/dashboard")
+      .then((response) => {
+        setDashboardData(response.data);
+        setAiStatus((current) => ({
+          ...current,
+          trained: response.data.model === "trained",
+          model: response.data.model || "No model",
+          dataset: response.data.path || "Dataset cargado",
+          features: response.data.columns || [],
+        }));
+      })
+      .catch((error) => {
+        console.error("No se pudo cargar el dashboard:", error);
+      });
   }, []);
 
   const applyFilters = () => {
@@ -103,13 +119,13 @@ function Observatorio() {
       <section className="kpi-row">
         <KpiCard
           icon="👨‍🎓"
-          value={mockKpis.total_records.toLocaleString()}
+          value={dashboardData ? dashboardData.total_records.toLocaleString() : mockKpis.total_records.toLocaleString()}
           label="Total registros analizados"
           delta="+4.2%"
         />
         <KpiCard
           icon="📂"
-          value={mockKpis.total_datasets}
+          value={dashboardData ? 1 : mockKpis.total_datasets}
           label="Total de datasets"
           delta="+0"
         />
@@ -121,7 +137,7 @@ function Observatorio() {
         />
         <KpiCard
           icon="🤖"
-          value={mockKpis.model}
+          value={dashboardData ? dashboardData.model : mockKpis.model}
           label="Modelo de IA utilizado"
           delta={aiStatus.trained ? "Activo" : "Inactivo"}
         />

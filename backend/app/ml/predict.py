@@ -1,8 +1,9 @@
 import joblib
 import pandas as pd
+from pathlib import Path
 from .preprocessing import prepare_features
 
-MODEL_PATH = "backend/models/model.joblib"
+MODEL_PATH = Path(__file__).resolve().parents[2] / "models" / "model.joblib"
 
 def predict(data: dict) -> dict:
     model = joblib.load(MODEL_PATH)
