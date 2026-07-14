@@ -1,0 +1,8 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pandas
+scikit-learn
+joblib
+sqlalchemy
+psycopg2-binary
+python-dotenv
