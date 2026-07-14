@@ -167,9 +167,9 @@ README.md
 
 https://github.com/melissa992/Concurso-Datos-al-Ecosistema-2026-IA-Desercion-Universitaria-id-70
 
-## Aplicación Web
+## Aplicación Web vercel
 
-Pendiente de despliegue.
+(https://concurso-datos-al-ecosistema-2026-i-seven.vercel.app/)
 
 ## Dashboard Power BI
 
