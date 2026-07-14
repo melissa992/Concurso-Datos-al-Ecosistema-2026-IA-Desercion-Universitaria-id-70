@@ -18,9 +18,16 @@ app.add_middleware(
 
 app.include_router(api_router, prefix="/api")
 
+
+@app.get("/")
+def root():
+    return {"status": "ok", "message": "EduPredict IA Backend funcionando"}
+
+
 @app.get("/api")
 def api_root():
     return {"status": "ok", "message": "API root"}
+
 
 @app.get("/api/health")
 def health_check():
