@@ -599,7 +599,7 @@ button[disabled] {
 .dashboard-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px }
 .dashboard-grid .col { display:flex; flex-direction:column; gap:18px }
 
-..chart-card { background: rgba(255,255,255,0.02); border-radius:12px; padding:18px; border:1px solid rgba(255,255,255,0.04); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+.chart-card { background: rgba(255,255,255,0.02); border-radius:12px; padding:18px; border:1px solid rgba(255,255,255,0.04); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
 .chart-card-header { margin-bottom: 14px; }
 .chart-card-header h3 { margin: 0 0 8px; font-size: 1.05rem; }
 .chart-card-subtitle { margin: 0; color: #9fc5ff; font-size: 0.9rem; line-height: 1.4; }
