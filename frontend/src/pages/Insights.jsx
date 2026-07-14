@@ -6,10 +6,26 @@ import LoadingOverlay from "../components/LoadingOverlay";
 export default function Insights() {
   const [data, setData] = useState(null);
 
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    api.get("/insights").then((response) => setData(response.data)).catch(console.error);
+    api.get("/insights")
+      .then((response) => setData(response.data))
+      .catch((error) => {
+        console.error(error);
+        setError("No se pudo cargar los hallazgos. Verifique la conexión al backend.");
+      });
   }, []);
 
+  if (error)
+    return (
+      <main className="page observatory-page">
+        <section className="page-header">
+          <h1 className="hero-title">Hallazgos Inteligentes</h1>
+          <p className="hero-description">{error}</p>
+        </section>
+      </main>
+    );
   if (!data) return <LoadingOverlay message="Cargando hallazgos inteligentes..." />;
 
   return (

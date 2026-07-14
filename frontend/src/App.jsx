@@ -27,6 +27,7 @@ function App() {
             <Route path="/insights" element={<Insights />} />
             <Route path="/reportes" element={<Reportes />} />
             <Route path="/acerca" element={<Acerca />} />
+            <Route path="*" element={<HomePage />} />
           </Routes>
         </main>
       </div>

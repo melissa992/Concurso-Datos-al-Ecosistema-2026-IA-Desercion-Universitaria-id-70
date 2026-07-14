@@ -11,12 +11,26 @@ export default function Exploracion() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     api.get("/exploration")
       .then((response) => setData(response.data))
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        setError("No se pudo cargar la exploración. Verifique la conexión al backend.");
+      });
   }, []);
 
+  if (error)
+    return (
+      <main className="page observatory-page">
+        <section className="page-header">
+          <h1 className="hero-title">Exploración de Datos</h1>
+          <p className="hero-description">{error}</p>
+        </section>
+      </main>
+    );
   if (!data) return <LoadingOverlay message="Cargando exploración de datos..." />;
 
   const columns = data.columns.slice(0, 8);

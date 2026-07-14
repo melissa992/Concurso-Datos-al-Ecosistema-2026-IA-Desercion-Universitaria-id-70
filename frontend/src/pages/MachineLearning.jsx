@@ -11,8 +11,15 @@ export default function MachineLearning() {
   const [modelData, setModelData] = useState(null);
   const [training, setTraining] = useState(false);
 
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    api.get("/model").then((response) => setModelData(response.data)).catch(console.error);
+    api.get("/model")
+      .then((response) => setModelData(response.data))
+      .catch((error) => {
+        console.error(error);
+        setError("No se pudo cargar el módulo de Machine Learning. Verifique la conexión al backend.");
+      });
   }, []);
 
   const handleTrain = async () => {
@@ -27,6 +34,15 @@ export default function MachineLearning() {
     }
   };
 
+  if (error)
+    return (
+      <main className="page observatory-page">
+        <section className="page-header">
+          <h1 className="hero-title">Machine Learning</h1>
+          <p className="hero-description">{error}</p>
+        </section>
+      </main>
+    );
   if (!modelData) return <LoadingOverlay message="Cargando métricas de Machine Learning..." />;
 
   return (

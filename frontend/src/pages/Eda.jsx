@@ -8,12 +8,26 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pi
 export default function Eda() {
   const [data, setData] = useState(null);
 
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     api.get("/eda")
       .then((response) => setData(response.data))
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        setError("No se pudo cargar el análisis exploratorio. Verifique la conexión al backend.");
+      });
   }, []);
 
+  if (error)
+    return (
+      <main className="page observatory-page">
+        <section className="page-header">
+          <h1 className="hero-title">Análisis Exploratorio</h1>
+          <p className="hero-description">{error}</p>
+        </section>
+      </main>
+    );
   if (!data) return <LoadingOverlay message="Cargando análisis exploratorio..." />;
 
   return (
