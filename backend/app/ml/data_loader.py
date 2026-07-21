@@ -5,7 +5,7 @@ from typing import Any, Dict
 from urllib.request import urlopen
 from datetime import datetime, timezone
 
-ROOT_DIR = Path(__file__).resolve().parents[2]
+ROOT_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT_DIR / "data"
 RAW_DIR = DATA_DIR / "raw"
 DATASET_PATH = DATA_DIR / "DATASET_DESERCION_LIMPIO.csv"
