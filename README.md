@@ -1,13 +1,15 @@
 # CM IA
 
-## Observatorio Inteligente para el Análisis y Predicción de la Deserción Universitaria
+# Observatorio Inteligente para el Análisis y Predicción de la Deserción Universitaria
 
-**CM IA** es un proyecto desarrollado para el concurso **Datos al Ecosistema 2026 – IA para Colombia**, categoría **Educación – Nivel Intermedio**.
+## Concurso Datos al Ecosistema 2026 – IA para Colombia
+
+Categoría: **Educación – Nivel Intermedio**
 
 El objetivo es combinar una aplicación web con un backend de análisis para explorar y comprender los patrones de deserción universitaria a partir de datos abiertos.
-Problema abordado
 
-README
+## README
+
 Título del Proyecto
 
 Sistema Inteligente para la Predicción del Riesgo de Deserción Universitaria mediante Inteligencia Artificial
@@ -28,150 +30,226 @@ Reducir la deserción.
 Mejorar indicadores institucionales.
 Optimizar programas de apoyo.
 Apoyar la toma de decisiones basada en datos.
+
 ---
+
+# Descripción
+
+CM IA es una plataforma inteligente que integra **datos abiertos, inteligencia artificial y visualización interactiva** para analizar el fenómeno de la deserción universitaria en Colombia.
 
 Cantidad del Dataset utilizado
 
-3 
+3
+
 ## Estructura del proyecto
 
-- `frontend/` – aplicación web construida con React y Vite.
-- `backend/` – API REST desarrollada con FastAPI.
-- `.gitignore` – recursos ignorados por git.
-- `README.md` – documentación del proyecto.
+La solución permite explorar información histórica, identificar patrones de comportamiento y estimar el riesgo de deserción mediante modelos de Machine Learning, facilitando la toma de decisiones basada en datos para instituciones de educación superior, investigadores y entidades gubernamentales.
+
+El proyecto fue desarrollado utilizando tecnologías modernas para ofrecer una arquitectura modular, escalable y fácilmente desplegable en la nube.
 
 ---
 
-## Tecnologías principales
+# Objetivo
+
+Desarrollar una plataforma tecnológica que aproveche datos abiertos e inteligencia artificial para apoyar el análisis de la deserción universitaria, proporcionando herramientas de consulta, visualización y predicción que contribuyan al diseño de estrategias de permanencia estudiantil.
+
+---
+
+# Problemática
+
+La deserción universitaria representa uno de los principales desafíos del sistema educativo colombiano debido a factores académicos, económicos y sociales.
+
+Aunque existen múltiples fuentes de información pública, estos datos generalmente se encuentran dispersos y sin herramientas analíticas que permitan interpretarlos de forma sencilla.
+
+CM IA centraliza estos datos y los transforma en información útil mediante inteligencia artificial y analítica de datos.
+
+---
+
+# Arquitectura de la solución
+
+La solución está compuesta por tres componentes principales.
+
+## Frontend
+
+Aplicación web desarrollada con:
 
 - React 18
 - Vite
 - React Router
+- HTML5
+- CSS3
+- JavaScript
+
+Funciones principales:
+
+- Visualización de indicadores
+- Navegación por módulos
+- Consulta de datos
+- Consumo de la API REST
+- Integración con Power BI
+
+---
+
+## Backend
+
+API REST desarrollada con:
+
 - FastAPI
-- Uvicorn
 - Python 3
+- Uvicorn
 - Pandas
+- NumPy
 - Scikit-learn
 
----
+Responsabilidades:
 
-## Cómo ejecutar el proyecto
-
-### 1. Instalar dependencias
-
-```powershell
-cd frontend
-npm install
-```
-
-```powershell
-cd ..\backend
-pip install -r requirements.txt
-```
-
-### 2. Iniciar el frontend
-
-```powershell
-cd frontend
-npm run dev
-```
-
-Abrir en el navegador:
-
-```text
-http://localhost:5173
-```
-
-### 3. Iniciar el backend
-
-```powershell
-cd backend
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-```
-
-Abrir en el navegador:
-
-```text
-http://localhost:8000/docs
-```
+- Procesamiento de datasets
+- Limpieza y transformación de datos
+- Generación de estadísticas
+- Entrenamiento y ejecución del modelo de IA
+- Exposición de servicios REST
 
 ---
 
-## Qué contiene el proyecto
+## Inteligencia Artificial
 
-- Interfaz web de consulta y navegación.
-- API backend para servir datos y lógica.
-- Base para análisis de deserción con Python.
-- Soporte para modelos de Machine Learning.
+El proyecto incorpora un modelo de clasificación supervisada utilizando **Random Forest**, seleccionado por su capacidad para:
 
----
+- manejar variables categóricas y numéricas,
+- reducir el sobreajuste mediante árboles múltiples,
+- ofrecer buena precisión con datos tabulares,
+- identificar la importancia de las variables.
 
-## Datos utilizados
-
-El proyecto se basa en datos abiertos de **Datos Abiertos Colombia**.
-
-| Conjunto de datos                       | Enlace                                                                                        |
-| --------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Deserción Académica Pregrado y Posgrado | https://www.datos.gov.co/dataset/DESERCION-ACADEMICA-PREGRADO-Y-POSGRADO/3iew-7wpx/about_data |
-| Deserción No Académica 1-2019           | https://www.datos.gov.co/Educaci-n/Deserci-n-no-acad-mica-1-2019/fhn9-rk3r/about_data         |
-| Deserción No Académica 2-2019           | https://www.datos.gov.co/Educaci-n/Deserci-n-no-acad-mica-2-2019/uxa5-pmvd/about_data         |
+El modelo permite estimar la probabilidad de deserción de un estudiante a partir de las características presentes en los datos abiertos.
 
 ---
 
-## Objetivo principal
+# Flujo del sistema
 
-Desarrollar una plataforma capaz de aprovechar datos abiertos y análisis estadístico para apoyar la comprensión de la deserción universitaria y la generación de información útil para la toma de decisiones.
-
----
-
-## Estado actual
-
-- ✅ Frontend inicial con React y Vite
-- ✅ Backend básico con FastAPI
-- ✅ Documentación actualizada
-- 🚧 En desarrollo: integración completa de datos, análisis y modelos de IA
-
----
-
-## Notas importantes
-
-- No se debe subir la carpeta `frontend/node_modules` al repositorio.
-- Para construir el frontend en producción:
-
-```powershell
-cd frontend
-npm run build
 ```
-
-- Para previsualizar el build:
-
-```powershell
-npm run preview
+Datos Abiertos Colombia
+            │
+            ▼
+   Limpieza de datos
+            │
+            ▼
+Procesamiento con Pandas
+            │
+            ▼
+Modelo Random Forest
+            │
+            ▼
+API FastAPI
+            │
+            ▼
+Frontend React
+            │
+            ▼
+Dashboard Power BI
 ```
 
 ---
 
-## Próximos pasos sugeridos
+# Tecnologías utilizadas
 
-- Integrar los datasets en el backend y la aplicación.
-- Desarrollar el modelo de Machine Learning para predicción de riesgo.
-- Añadir visualizaciones y métricas en la interfaz.
-- Incorporar un dashboard interactivo con Power BI o similares.
+## Frontend
 
-CM IA constituye una herramienta tecnológica orientada al aprovechamiento de datos abiertos para fortalecer el análisis de la deserción universitaria.
+- React
+- Vite
+- React Router
 
-La solución puede servir como apoyo para instituciones de educación superior, investigadores y entidades públicas interesadas en comprender este fenómeno y diseñar estrategias de permanencia estudiantil.
+## Backend
+
+- FastAPI
+- Python
+- Uvicorn
+
+## Ciencia de Datos
+
+- Pandas
+- NumPy
+- Scikit-learn
+
+## Visualización
+
+- Power BI
+
+## Despliegue
+
+- Vercel (Frontend)
+- Render (Backend)
 
 ---
 
-# 📁 Estructura del proyecto
+# Modelo de Inteligencia Artificial
 
-```text
+El modelo implementado corresponde a un algoritmo de clasificación Random Forest.
+
+## Variables utilizadas
+
+Entre las variables analizadas se encuentran:
+
+- nivel académico
+- programa
+- periodo académico
+- estado del estudiante
+- características registradas en los conjuntos de datos abiertos
+
+## Salida del modelo
+
+El modelo estima la probabilidad de que un estudiante pertenezca a una categoría asociada con riesgo de deserción, proporcionando un apoyo para el análisis institucional.
+
+---
+
+# Valor agregado
+
+CM IA aporta valor mediante:
+
+- Integración de múltiples conjuntos de datos abiertos.
+- Plataforma web de acceso sencillo.
+- Predicción basada en inteligencia artificial.
+- Dashboard interactivo para análisis visual.
+- Arquitectura desacoplada entre frontend y backend.
+- Solución completamente desplegada en la nube.
+- Uso exclusivo de tecnologías de código abierto.
+
+---
+
+# Escalabilidad
+
+La arquitectura fue diseñada para crecer de forma modular.
+
+Entre las posibilidades de escalamiento se encuentran:
+
+- incorporación de nuevos conjuntos de datos;
+- entrenamiento periódico del modelo con información actualizada;
+- integración con bases de datos institucionales;
+- incorporación de nuevos algoritmos de Machine Learning;
+- despliegue en servicios cloud con balanceo de carga;
+- integración mediante APIs con otras plataformas educativas.
+
+Gracias a la separación entre frontend, backend y modelo de IA, cada componente puede evolucionar independientemente sin afectar el funcionamiento general del sistema.
+
+---
+
+# Estructura del proyecto
+
+```
 CM-IA/
 
 frontend/
+│
+├── src/
+├── public/
+└── package.json
 
 backend/
+│
+├── app/
+├── models/
+├── services/
+├── requirements.txt
+└── main.py
 
 data/
 
@@ -179,38 +257,112 @@ docs/
 
 powerbi/
 
-recursos/
-
 README.md
 ```
 
 ---
 
-# 🔗 Enlaces
+# Instalación
+
+## Clonar el repositorio
+
+```bash
+git clone https://github.com/melissa992/Concurso-Datos-al-Ecosistema-2026-IA-Desercion-Universitaria-id-70.git
+```
+
+---
+
+## Instalar Frontend
+
+```bash
+cd frontend
+npm install
+```
+
+Ejecutar
+
+```bash
+npm run dev
+```
+
+---
+
+## Instalar Backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+```
+
+Ejecutar
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Documentación Swagger
+
+```
+http://localhost:8000/docs
+```
+
+---
+
+# Datos utilizados
+
+La solución utiliza conjuntos de datos abiertos publicados por el Gobierno de Colombia.
+
+| Dataset                                 | Fuente                                                                                        |
+| --------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Deserción Académica Pregrado y Posgrado | https://www.datos.gov.co/dataset/DESERCION-ACADEMICA-PREGRADO-Y-POSGRADO/3iew-7wpx/about_data |
+| Deserción No Académica 1-2019           | https://www.datos.gov.co/Educaci-n/Deserci-n-no-acad-mica-1-2019/fhn9-rk3r/about_data         |
+| Deserción No Académica 2-2019           | https://www.datos.gov.co/Educaci-n/Deserci-n-no-acad-mica-2-2019/uxa5-pmvd/about_data         |
+
+---
+
+# Estado del proyecto
+
+- Frontend funcional
+- Backend funcional
+- ✅ API REST
+- ✅ Modelo de Machine Learning
+- ✅ Dashboard Power BI
+- ✅ Despliegue en la nube
+
+---
+
+# Enlaces
 
 ## Repositorio
 
 https://github.com/melissa992/Concurso-Datos-al-Ecosistema-2026-IA-Desercion-Universitaria-id-70
 
-## Aplicación Web vercel
+## Aplicación Web
 
-(https://concurso-datos-al-ecosistema-2026-i-seven.vercel.app/)
-
-## Dashboard Power BI
-
-Incluido en el repositorio.
+https://concurso-datos-al-ecosistema-2026-i-seven.vercel.app/
 
 ---
 
-# 👥 Equipo de desarrollo
+# Equipo de desarrollo
 
-- **Angie Melissa Ocoro Hurtado cc.1192807085**
-- **Juan Camilo López Quintana cc.1118310951**
+**Angie Melissa Ocoro Hurtado**  
+Ingeniería de Sistemas  
+Universidad del Valle
+
+**Juan Camilo López Quintana**  
+Ingeniería de Sistemas  
+Universidad del Valle
 
 ---
 
-# 📄 Licencia
+# Impacto esperado
 
-Proyecto desarrollado para el **Concurso Datos al Ecosistema 2026 – IA para Colombia**.
+CM IA busca contribuir al fortalecimiento de la permanencia estudiantil mediante el análisis inteligente de datos abiertos, facilitando la identificación temprana de factores asociados a la deserción y apoyando la formulación de estrategias institucionales basadas en evidencia.
+
+---
+
+# Licencia
+
+Proyecto desarrollado para el Concurso **Datos al Ecosistema 2026 – IA para Colombia**.
 
 Uso académico e investigativo.
