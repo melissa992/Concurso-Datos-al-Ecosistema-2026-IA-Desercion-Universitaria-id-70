@@ -5,6 +5,7 @@
 **CM IA** es un proyecto desarrollado para el concurso **Datos al Ecosistema 2026 – IA para Colombia**, categoría **Educación – Nivel Intermedio**.
 
 El objetivo es combinar una aplicación web con un backend de análisis para explorar y comprender los patrones de deserción universitaria a partir de datos abiertos.
+Problema abordado
 
 README
 Título del Proyecto
