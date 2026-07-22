@@ -6,8 +6,32 @@
 
 El objetivo es combinar una aplicación web con un backend de análisis para explorar y comprender los patrones de deserción universitaria a partir de datos abiertos.
 
+README
+Título del Proyecto
+
+Sistema Inteligente para la Predicción del Riesgo de Deserción Universitaria mediante Inteligencia Artificial
+
+Problema abordado
+
+La deserción universitaria representa un desafío para las instituciones de educación superior debido a sus impactos académicos, económicos y sociales. Generalmente, las universidades identifican estudiantes en riesgo cuando ya presentan problemas críticos, dificultando una intervención oportuna.
+
+Este proyecto desarrolla una plataforma basada en Inteligencia Artificial que permite predecir el riesgo de deserción estudiantil a partir de variables académicas y socioeconómicas, facilitando la toma de decisiones preventivas.
+
+Justificación (Valor público o empresarial)
+
+La solución permite que las instituciones educativas identifiquen tempranamente estudiantes con riesgo de abandonar sus estudios, optimizando recursos destinados al acompañamiento académico y mejorando la permanencia estudiantil.
+
+Su implementación contribuye a:
+
+Reducir la deserción.
+Mejorar indicadores institucionales.
+Optimizar programas de apoyo.
+Apoyar la toma de decisiones basada en datos.
 ---
 
+Cantidad del Dataset utilizado
+
+3 
 ## Estructura del proyecto
 
 - `frontend/` – aplicación web construida con React y Vite.
