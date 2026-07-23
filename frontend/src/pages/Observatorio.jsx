@@ -79,7 +79,7 @@ function Observatorio() {
 
   useEffect(() => {
     api
-      .get("/dashboard")
+      .get("dashboard")
       .then((response) => {
         setDashboardData(response.data);
         setAiStatus((current) => ({

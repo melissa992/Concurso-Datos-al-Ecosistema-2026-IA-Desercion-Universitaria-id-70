@@ -11,7 +11,7 @@ export default function Eda() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    api.get("/eda")
+    api.get("eda")
       .then((response) => setData(response.data))
       .catch((error) => {
         console.error(error);

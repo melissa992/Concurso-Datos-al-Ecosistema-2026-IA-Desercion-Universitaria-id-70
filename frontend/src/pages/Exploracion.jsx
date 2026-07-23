@@ -27,7 +27,7 @@ export default function Exploracion() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    api.get("/exploration")
+    api.get("exploration")
       .then((response) => setData(response.data))
       .catch((error) => {
         console.error(error);
