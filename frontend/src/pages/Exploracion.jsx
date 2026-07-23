@@ -27,11 +27,14 @@ export default function Exploracion() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    api.get("exploration")
+    api
+      .get("exploration")
       .then((response) => setData(response.data))
       .catch((error) => {
         console.error(error);
-        setError("No se pudo cargar la exploración. Verifique la conexión al backend.");
+        setError(
+          "No se pudo cargar la exploración. Verifique la conexión al backend.",
+        );
       });
   }, []);
 
@@ -44,11 +47,17 @@ export default function Exploracion() {
         </section>
       </main>
     );
-  if (!data) return <LoadingOverlay message="Cargando exploración de datos..." />;
+  if (!data)
+    return <LoadingOverlay message="Cargando exploración de datos..." />;
 
   const columns = data.columns.slice(0, 8);
-  const rows = data.sample_rows.map((row) => Object.fromEntries(columns.map((col) => [col, row[col]])));
-  const displayedRows = rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const rows = data.sample_rows.map((row) =>
+    Object.fromEntries(columns.map((col) => [col, row[col]])),
+  );
+  const displayedRows = rows.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage,
+  );
   const totalRows = rows.length;
 
   return (
@@ -56,14 +65,22 @@ export default function Exploracion() {
       <section className="page-header">
         <div>
           <h1 className="hero-title">Exploración de Datos</h1>
-          <p className="hero-description">Análisis detallado y visualizaciones interactivas del dataset.</p>
+          <p className="hero-description">
+            Análisis detallado y visualizaciones interactivas del dataset.
+          </p>
         </div>
       </section>
 
       <div className="stats-row">
-        <StatCard title="Registros" value={data.summary.total_records.toLocaleString()} />
+        <StatCard
+          title="Registros"
+          value={data.summary.total_records.toLocaleString()}
+        />
         <StatCard title="Columnas" value={data.summary.total_columns} />
-        <StatCard title="Categorías" value={data.summary.categorical_variables} />
+        <StatCard
+          title="Categorías"
+          value={data.summary.categorical_variables}
+        />
         <StatCard title="Numéricos" value={data.summary.numeric_variables} />
         <StatCard title="Faltantes" value={data.summary.missing_values} />
         <StatCard title="Duplicados" value={data.summary.duplicates} />
@@ -75,7 +92,10 @@ export default function Exploracion() {
           subtitle="Muestra la cantidad de registros asociados a cada facultad del dataset"
         >
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={data.faculty_distribution} margin={{ top: 10, right: 0, left: 0, bottom: 10 }}>
+            <BarChart
+              data={data.faculty_distribution}
+              margin={{ top: 10, right: 0, left: 0, bottom: 10 }}
+            >
               <XAxis dataKey="name" tick={{ fontSize: 12 }} />
               <YAxis />
               <Tooltip formatter={(value) => [value, "Registros"]} />
@@ -88,8 +108,14 @@ export default function Exploracion() {
           subtitle="Cuenta de registros para los programas con más estudiantes en el dataset"
         >
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={data.program_distribution} margin={{ top: 10, right: 0, left: 0, bottom: 10 }}>
-              <XAxis dataKey="name" tick={{ fontSize: 12, angle: -25, textAnchor: 'end' }} />
+            <BarChart
+              data={data.program_distribution}
+              margin={{ top: 10, right: 0, left: 0, bottom: 10 }}
+            >
+              <XAxis
+                dataKey="name"
+                tick={{ fontSize: 12, angle: -25, textAnchor: "end" }}
+              />
               <YAxis />
               <Tooltip formatter={(value) => [value, "Registros"]} />
               <Bar dataKey="value" fill="#10b981" radius={[8, 8, 0, 0]} />
@@ -112,13 +138,28 @@ export default function Exploracion() {
                 outerRadius={110}
                 innerRadius={52}
                 paddingAngle={6}
-                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                label={({ name, percent }) =>
+                  `${name}: ${(percent * 100).toFixed(0)}%`
+                }
               >
                 {data.gender_distribution.map((entry, index) => (
-                  <Cell key={index} fill={index === 0 ? "#22c55e" : index === 1 ? "#38bdf8" : "#f97316"} />
+                  <Cell
+                    key={index}
+                    fill={
+                      index === 0
+                        ? "#22c55e"
+                        : index === 1
+                          ? "#38bdf8"
+                          : "#f97316"
+                    }
+                  />
                 ))}
               </Pie>
-              <Legend verticalAlign="bottom" height={36} formatter={(value) => `Género: ${value}`} />
+              <Legend
+                verticalAlign="bottom"
+                height={36}
+                formatter={(value) => `Género: ${value}`}
+              />
               <Tooltip formatter={(value) => [value, "Registros"]} />
             </PieChart>
           </ResponsiveContainer>
@@ -128,13 +169,23 @@ export default function Exploracion() {
           subtitle="Número de registros clasificados por estrato en el dataset"
         >
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={data.estrato_distribution} margin={{ top: 10, right: 0, left: 0, bottom: 10 }}>
+            <BarChart
+              data={data.estrato_distribution}
+              margin={{ top: 10, right: 0, left: 0, bottom: 10 }}
+            >
               <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-              <XAxis dataKey="name" tick={{ fontSize: 12, angle: -20, textAnchor: 'end' }} />
+              <XAxis
+                dataKey="name"
+                tick={{ fontSize: 12, angle: -20, textAnchor: "end" }}
+              />
               <YAxis />
               <Tooltip formatter={(value) => [value, "Registros"]} />
               <Bar dataKey="value" fill="#f59e0b" radius={[10, 10, 0, 0]}>
-                <LabelList dataKey="value" position="top" formatter={(value) => value.toLocaleString()} />
+                <LabelList
+                  dataKey="value"
+                  position="top"
+                  formatter={(value) => value.toLocaleString()}
+                />
               </Bar>
             </BarChart>
           </ResponsiveContainer>
@@ -144,7 +195,10 @@ export default function Exploracion() {
       <section className="table-section">
         <div className="section-header">
           <h2>Vista preliminar del dataset</h2>
-          <p>Usa esta tabla para revisar las primeras filas del conjunto de datos cargado.</p>
+          <p>
+            Usa esta tabla para revisar las primeras filas del conjunto de datos
+            cargado.
+          </p>
         </div>
         <DatasetTable
           columns={columns}
@@ -153,7 +207,9 @@ export default function Exploracion() {
           rowsPerPage={rowsPerPage}
           count={totalRows}
           onPageChange={(event, newPage) => setPage(newPage)}
-          onRowsPerPageChange={(event) => setRowsPerPage(parseInt(event.target.value, 10))}
+          onRowsPerPageChange={(event) =>
+            setRowsPerPage(parseInt(event.target.value, 10))
+          }
         />
       </section>
     </main>

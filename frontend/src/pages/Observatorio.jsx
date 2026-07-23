@@ -120,7 +120,11 @@ function Observatorio() {
       <section className="kpi-row">
         <KpiCard
           icon="👨‍🎓"
-          value={dashboardData?.total_records != null ? dashboardData.total_records.toLocaleString() : "Cargando..."}
+          value={
+            dashboardData?.total_records != null
+              ? dashboardData.total_records.toLocaleString()
+              : "Cargando..."
+          }
           label="Total registros analizados"
           delta=""
         />
@@ -132,7 +136,11 @@ function Observatorio() {
         />
         <KpiCard
           icon="🏫"
-          value={dashboardData ? dashboardData.total_programs?.toLocaleString() ?? "—" : "Cargando..."}
+          value={
+            dashboardData
+              ? (dashboardData.total_programs?.toLocaleString() ?? "—")
+              : "Cargando..."
+          }
           label="Total programas/instituciones"
           delta=""
         />
@@ -144,7 +152,9 @@ function Observatorio() {
         />
         <KpiCard
           icon="📅"
-          value={dashboardData ? dashboardData.last_update ?? "—" : "Cargando..."}
+          value={
+            dashboardData ? (dashboardData.last_update ?? "—") : "Cargando..."
+          }
           label="Última actualización"
           delta=""
         />

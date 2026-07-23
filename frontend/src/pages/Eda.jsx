@@ -3,7 +3,17 @@ import api from "../services/api";
 import StatCard from "../components/StatCard";
 import ChartCard from "../components/ChartCard";
 import LoadingOverlay from "../components/LoadingOverlay";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
 
 export default function Eda() {
   const [data, setData] = useState(null);
@@ -11,11 +21,14 @@ export default function Eda() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    api.get("eda")
+    api
+      .get("eda")
       .then((response) => setData(response.data))
       .catch((error) => {
         console.error(error);
-        setError("No se pudo cargar el análisis exploratorio. Verifique la conexión al backend.");
+        setError(
+          "No se pudo cargar el análisis exploratorio. Verifique la conexión al backend.",
+        );
       });
   }, []);
 
@@ -28,22 +41,40 @@ export default function Eda() {
         </section>
       </main>
     );
-  if (!data) return <LoadingOverlay message="Cargando análisis exploratorio..." />;
+  if (!data)
+    return <LoadingOverlay message="Cargando análisis exploratorio..." />;
 
   return (
     <main className="page observatory-page">
       <section className="page-header">
         <div>
           <h1 className="hero-title">Análisis Exploratorio</h1>
-          <p className="hero-description">Visualiza tendencias, frecuencias y calidad del dataset.</p>
+          <p className="hero-description">
+            Visualiza tendencias, frecuencias y calidad del dataset.
+          </p>
         </div>
       </section>
 
       <div className="stats-row">
-        <StatCard title="Registros" value={data.total_records.toLocaleString()} />
-        <StatCard title="Variables numéricas" value={data.numeric_columns.length} />
-        <StatCard title="Variables categóricas" value={data.categorical_columns.length} />
-        <StatCard title="Valores faltantes" value={Object.values(data.missing_values).reduce((sum, value) => sum + (value || 0), 0)} />
+        <StatCard
+          title="Registros"
+          value={data.total_records.toLocaleString()}
+        />
+        <StatCard
+          title="Variables numéricas"
+          value={data.numeric_columns.length}
+        />
+        <StatCard
+          title="Variables categóricas"
+          value={data.categorical_columns.length}
+        />
+        <StatCard
+          title="Valores faltantes"
+          value={Object.values(data.missing_values).reduce(
+            (sum, value) => sum + (value || 0),
+            0,
+          )}
+        />
       </div>
 
       <div className="dashboard-grid">
@@ -85,7 +116,12 @@ export default function Eda() {
         <ChartCard title="Distribución por género">
           <ResponsiveContainer width="100%" height={260}>
             <PieChart>
-              <Pie data={data.distribution_columns.GENERO || []} dataKey="value" nameKey="name" outerRadius={90}>
+              <Pie
+                data={data.distribution_columns.GENERO || []}
+                dataKey="value"
+                nameKey="name"
+                outerRadius={90}
+              >
                 {data.distribution_columns.GENERO?.map((item, index) => (
                   <Cell key={index} fill={index % 2 ? "#2563eb" : "#22d3ee"} />
                 ))}
